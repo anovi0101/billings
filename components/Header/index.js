@@ -1,5 +1,20 @@
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ContactSupportIcon from '@mui/icons-material/ContactSupport';
+
+
 export default function Header() {
     return <header>
-        <h1>This is the mighty Header</h1>
+        <div className="mobile-header">
+        <ul>
+          <li>
+            <ArrowBackIcon className="arrow-left-mobile" />
+            </li> 
+            <li>Billing
+      </li>
+      <li>
+    <ContactSupportIcon />
+      </li>
+      </ul>
+      </div>
     </header>
 }
