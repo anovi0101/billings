@@ -3,11 +3,11 @@ import Link from "next/link";
 
 export default function InvoiceCard (props){
     return (
-        <Link href={props.href} as={`/invoices/${props.id}`}>
-            <Grid container spacing={2}>
+        <Link href={props.href} as={`/invoices/${props.id}`} passHref>
+            <Grid container spacing={2} sx={{marginLeft:0}}>
           <Grid item xs container direction="column" sx={{color: "#32424E"}}>
             <Typography gutterBottom variant="subtitle1" component="div" sx={{opacity: 0.4}}>
-              Invoice 210230138
+              Invoice {props.id}
             </Typography>
             <Typography variant="h6" gutterBottom>
               October
@@ -17,8 +17,8 @@ export default function InvoiceCard (props){
             </Typography>
           </Grid>
           <Grid item>
-            <Typography variant="subtitle1">PAID</Typography>
-            <Typography variant="h5">49,99{"\u20AC"}</Typography>
+            <Typography variant="subtitle1" sx={{textAlign: "center", backgroundColor: "#7DBE00", color: "#fff", borderTopLeftRadius: "10px", borderBottomLeftRadius: "10px", right: 0}}>PAID</Typography>
+            <Typography variant="h5" sx={{paddingRight: 1}}>49,99{"\u20AC"}</Typography>
           </Grid>
         </Grid>
         </Link>
