@@ -1,24 +1,17 @@
-import { Icon, Link } from "@mui/material";
 import {
-  AppBar,
   Divider,
   Box,
   Grid,
   Container,
-  IconButton,
   Typography,
-  Toolbar,
-  Button,
-  Paper,
 } from "@mui/material";
 import {
-  ArrowBack,
-  ContactSupport,
   Check,
   CalendarToday,
 } from "@mui/icons-material";
 
 import Invoices from "./Invoices";
+import AppBarComponent from "./AppBar";
 
 const invoiceNumbers = [
   { id: 1 },
@@ -40,44 +33,7 @@ const invoiceNumbers = [
 export default function Home() {
   return (
     <Container disableGutters sx={{ flexGrow: 1, background: "#F2F5F8"}}>
-      <AppBar
-        position="sticky"
-        sx={{
-          boxShadow: "0px 0px 0px 0px",
-          height: "5rem",
-          background: "linear-gradient(90deg, #26A1B7 0%, #0372AE 100%)",
-          color: "#fff",
-        }}
-      >
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 0 }}
-          >
-            <ArrowBack />
-          </IconButton>
-          <Typography
-            variant="h5"
-            component="div"
-            sx={{ flexGrow: 1, fontWeight: "700" }}
-          >
-            Billing
-          </Typography>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: -1 }}
-          >
-            <ContactSupport />
-          </IconButton>
-        </Toolbar>
-      </AppBar>
-
+      <AppBarComponent />
       <Box
         sx={{
           color: "#fff",

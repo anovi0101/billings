@@ -41,16 +41,16 @@ export default function Invoice() {
           margin: "0",
           color: "#fff",
           justifyContent: "space-between",
-          padding: 0,
+          padding: 2,
         }}
       >
         <Grid item xs={5}>
-          <Typography variant="subtitle2">Invoice number</Typography>
+          <Typography variant="subtitle2" >Invoice number</Typography>
         </Grid>
         <Grid item xs={5}>
           <Typography
             variant="subtitle2"
-            style={{ position: "absolute", right: "1rem" }}
+            sx={{ textAlign: "end" }}
           >
             Due date
           </Typography>
@@ -61,14 +61,14 @@ export default function Invoice() {
         <Grid item xs={5}>
           <Typography
             variant="subtitle1"
-            style={{ position: "absolute", right: "1rem" }}
+            sx={{ textAlign: "end"}}
           >
             21/10/2020
           </Typography>
         </Grid>
       </Grid>
 
-      <Container style={{ width: "100%", padding: "16px" }}>
+      <Container sx={{ width: "100%", padding: "16px" }}>
         <Grid
           container
           spacing={1}
@@ -81,12 +81,12 @@ export default function Invoice() {
           }}
         >
           <Grid item xs={5}>
-            <Typography variant="subtitle2" style={{ fontWeight: "bold" }}>
+            <Typography variant="subtitle2" sx={{ fontWeight: "bold" }}>
               Plan Details
             </Typography>
           </Grid>
           <Grid item xs={5}>
-            <Typography variant="subtitle2" style={{ fontWeight: "bold" }}>
+            <Typography variant="subtitle2" sx={{ fontWeight: "bold",textAlign: "end" }}>
               Amount
             </Typography>
           </Grid>
@@ -94,21 +94,21 @@ export default function Invoice() {
             <Typography variant="subtitle1">ILIMITADA 30</Typography>
           </Grid>
           <Grid item xs={5}>
-            <Typography variant="subtitle2" style={{ opacity: 0.7 }}>
+            <Typography variant="subtitle2" sx={{ opacity: 0.7 }}>
               21/09/2020 - 21/10/2020
             </Typography>
           </Grid>
-          <Grid item xs={5}>
+          <Grid item xs={5} sx={{textAlign: "end"}}>
             <Typography>49,99{"\u20AC"}</Typography>
           </Grid>
-          <Divider flexItem style={{ flexGrow: 1, flexBasis: "100%" }} />
+          <Divider flexItem sx={{ flexGrow: 1, flexBasis: "100%" }} />
           <Grid item xs={5}>
-            <Typography variant="subtitle1" style={{ fontWeight: "bold" }}>
+            <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
               Sub Total
             </Typography>
           </Grid>
           <Grid item xs={5}>
-            <Typography variant="subtitle1" style={{ fontWeight: "bold" }}>
+            <Typography variant="subtitle1" sx={{ fontWeight: "bold",textAlign: "end" }}>
               49,99{"\u20AC"}
             </Typography>
           </Grid>
