@@ -12,8 +12,9 @@ import { ArrowBack } from "@mui/icons-material";
 
 export default function Invoice() {
   const router = useRouter();
+
   return (
-    <Container disableGutters maxWidth="sm">
+    <Container disableGutters maxWidth="900px">
       <AppBar
         position="sticky"
         style={{
@@ -28,7 +29,7 @@ export default function Invoice() {
           fontWeight: "700",
         }}
       >
-        <IconButton>
+        <IconButton onClick={() => router.back()}>
           <ArrowBack />
         </IconButton>
         <Typography variant="h5">October</Typography>
@@ -45,13 +46,10 @@ export default function Invoice() {
         }}
       >
         <Grid item xs={5}>
-          <Typography variant="subtitle2" >Invoice number</Typography>
+          <Typography variant="subtitle2">Invoice number</Typography>
         </Grid>
         <Grid item xs={5}>
-          <Typography
-            variant="subtitle2"
-            sx={{ textAlign: "end" }}
-          >
+          <Typography variant="subtitle2" sx={{ textAlign: "end" }}>
             Due date
           </Typography>
         </Grid>
@@ -59,10 +57,7 @@ export default function Invoice() {
           <Typography variant="subtitle1">{router.query.invoice}</Typography>
         </Grid>
         <Grid item xs={5}>
-          <Typography
-            variant="subtitle1"
-            sx={{ textAlign: "end"}}
-          >
+          <Typography variant="subtitle1" sx={{ textAlign: "end" }}>
             21/10/2020
           </Typography>
         </Grid>
@@ -86,7 +81,10 @@ export default function Invoice() {
             </Typography>
           </Grid>
           <Grid item xs={5}>
-            <Typography variant="subtitle2" sx={{ fontWeight: "bold",textAlign: "end" }}>
+            <Typography
+              variant="subtitle2"
+              sx={{ fontWeight: "bold", textAlign: "end" }}
+            >
               Amount
             </Typography>
           </Grid>
@@ -98,7 +96,7 @@ export default function Invoice() {
               21/09/2020 - 21/10/2020
             </Typography>
           </Grid>
-          <Grid item xs={5} sx={{textAlign: "end"}}>
+          <Grid item xs={5} sx={{ textAlign: "end" }}>
             <Typography>49,99{"\u20AC"}</Typography>
           </Grid>
           <Divider flexItem sx={{ flexGrow: 1, flexBasis: "100%" }} />
@@ -108,7 +106,10 @@ export default function Invoice() {
             </Typography>
           </Grid>
           <Grid item xs={5}>
-            <Typography variant="subtitle1" sx={{ fontWeight: "bold",textAlign: "end" }}>
+            <Typography
+              variant="subtitle1"
+              sx={{ fontWeight: "bold", textAlign: "end" }}
+            >
               49,99{"\u20AC"}
             </Typography>
           </Grid>

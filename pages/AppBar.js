@@ -7,7 +7,6 @@ return(
         position="sticky"
         sx={{
           boxShadow: "0px 0px 0px 0px",
-          //height: "5rem",
           background: "linear-gradient(90deg, #26A1B7 0%, #0372AE 100%)",
           color: "#fff",
           padding: "0.75rem 0 0.5rem"

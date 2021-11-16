@@ -5,7 +5,6 @@ export default function InvoiceCard(props) {
   return (
     <Paper
       sx={{
-        // "& > :not(:first-child)": { marginTop: "16px" },
         p: 2,
         marginTop: 2,
         marginLeft: "auto",
