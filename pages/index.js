@@ -53,7 +53,10 @@ export default function Home(props) {
 
   const drawer = (
     <div>
-      <Toolbar />
+      <Toolbar>
+        <Typography>Alex Garcia</Typography>
+        <Typography>alex.garcia@gmail.com</Typography>
+      </Toolbar>
       <Divider />
       <List>
         <ListItem button key="HOME">
@@ -93,14 +96,14 @@ export default function Home(props) {
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Container disableGutters sx={{ flexGrow: 1, background: "#F2F5F8"}}>
+    <Container disableGutters sx={{ background: "#F2F5F8"}}>
       <AppBarComponent sx={{width: {sm: `calc(100% - ${drawerWidth}px)`},
           ml: {sm: `${drawerWidth}px`}}} />
       <Box component = "nav" sx={{width: {sm: drawerWidth}, flexShrink: {sm:0}}}>
       <Drawer
           variant="permanent"
           sx={{
-            display: { xs: 'none', sm: 'block' },
+            display: { xs: 'none', lg: 'block' },
             '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
           }}
           open

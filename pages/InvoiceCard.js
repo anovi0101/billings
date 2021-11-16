@@ -1,4 +1,4 @@
-import { Grid,Paper, Typography } from "@mui/material";
+import { Grid, Paper, Typography } from "@mui/material";
 import Link from "next/link";
 
 export default function InvoiceCard(props) {
@@ -61,6 +61,17 @@ export default function InvoiceCard(props) {
             </Typography>
             <Typography variant="h5" sx={{ paddingRight: 1 }}>
               49,99{"\u20AC"}
+            </Typography>
+            <Typography
+              variant="subtitle2"
+              sx={{
+                textAlign: "center",
+                color: "#32424E",
+                opacity: "0.7",
+                right: 0,
+              }}
+            >
+              View
             </Typography>
           </Grid>
         </Grid>
