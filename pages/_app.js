@@ -23,7 +23,11 @@ function BillingApp({ Component, pageProps }) {
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
+        {/* <sSidebar width={}/> */}
+        {/* <Container sx={{}}> */}
         <Component {...pageProps} />
+        {/* </Container/> */}
+        {/* <Footer /> */}
       </ThemeProvider>
     </>
   );
