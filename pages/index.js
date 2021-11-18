@@ -8,20 +8,14 @@ import Sidebar from "../components/Sidebar";
 import * as React from "react";
 
 const invoiceNumbers = [
-  { id: 1 },
-  { id: 2 },
-  { id: 3 },
-  { id: 4 },
-  { id: 5 },
-  { id: 6 },
-  { id: 7 },
-  { id: 8 },
-  { id: 9 },
-  { id: 10 },
-  { id: 11 },
-  { id: 12 },
-  { id: 13 },
-  { id: 14 },
+  { id: 8, status: "ISSUED", due: "21/11/2020", amount: 79.99 },
+  { id: 7, status: "OVERDUE", due: "21/10/2020", amount: 49.99 },
+  { id: 6, status: "PAID", due: "21/09/2020", amount: 79.99 },
+  { id: 5, status: "PAID", due: "21/08/2020", amount: 49.99 },
+  { id: 4, status: "PAID", due: "21/07/2020", amount: 29.99 },
+  { id: 3, status: "PAID", due: "21/06/2020", amount: 79.99 },
+  { id: 2, status: "PAID", due: "21/05/2020", amount: 39.99 },
+  { id: 1, status: "PAID", due: "21/04/2020", amount: 79.99 },
 ];
 
 const drawerWidth = 240;
@@ -84,8 +78,13 @@ export default function Home(props) {
               <Typography>
                 <CalendarToday />
               </Typography>
-              <Typography variant="subtitle2">Due on 21/10/2020</Typography>
-              <Typography variant="h5">49,99{"\u20AC"}</Typography>
+              <Typography variant="subtitle2">
+                Due on {invoiceNumbers[0].due}
+              </Typography>
+              <Typography variant="h5">
+                {invoiceNumbers[0].amount}
+                {"\u20AC"}
+              </Typography>
             </Grid>
           </Grid>
           <Typography variant="subtitle2">

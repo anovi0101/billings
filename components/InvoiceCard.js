@@ -2,6 +2,28 @@ import { Grid, Paper, Typography } from "@mui/material";
 import Link from "next/link";
 
 export default function InvoiceCard(props) {
+  const STATUS_COLORS = {
+    PAID: "#7DBE00",
+    OVERDUE: "#CF4520",
+    ISSUED: "#64CEFB",
+  };
+
+  function getMonthName(month) {
+    const d = new Date();
+    d.setMonth(month - 1);
+    const monthName = d.toLocaleString("default", { month: "long" });
+    return monthName;
+  }
+
+  function getDueMessage(status) {
+    if (status === "OVERDUE") {
+      return "Was due on";
+    } else if (status === "ISSUED") {
+      return "Due on";
+    }
+    return "Paid on";
+  }
+
   return (
     <Paper
       sx={{
@@ -35,14 +57,14 @@ export default function InvoiceCard(props) {
               Invoice {props.id}
             </Typography>
             <Typography variant="h6" gutterBottom>
-              October
+              {getMonthName(props.due.split("/")[1])}
             </Typography>
             <Typography
               variant="subtitle1"
               color="text.secondary"
               sx={{ opacity: 0.7 }}
             >
-              Paid on <strong>21/10/2020</strong>
+              {getDueMessage(props.status)} <strong>{props.due}</strong>
             </Typography>
           </Grid>
           <Grid item>
@@ -50,17 +72,18 @@ export default function InvoiceCard(props) {
               variant="subtitle1"
               sx={{
                 textAlign: "center",
-                backgroundColor: "#7DBE00",
+                backgroundColor: STATUS_COLORS[props.status],
                 color: "#fff",
                 borderTopLeftRadius: "10px",
                 borderBottomLeftRadius: "10px",
                 right: 0,
               }}
             >
-              PAID
+              {props.status}
             </Typography>
             <Typography variant="h5" sx={{ paddingRight: 1 }}>
-              49,99{"\u20AC"}
+              {props.amount}
+              {"\u20AC"}
             </Typography>
             <Typography
               variant="subtitle2"
