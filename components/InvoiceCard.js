@@ -35,6 +35,7 @@ export default function InvoiceCard(props) {
         flexGrow: 1,
         borderRadius: 0,
         boxShadow: "inset 0px -1px 0px rgba(50, 66, 78, 0.1)",
+        "&:not(:first-child)": { marginTop: "16px" },
       }}
     >
       <Link href={props.href} as={`/invoices/${props.id}`} passHref>
@@ -43,7 +44,6 @@ export default function InvoiceCard(props) {
           spacing={2}
           sx={{
             marginLeft: 0,
-            "&:not(:first-child)": { marginTop: "16px" },
             backgroundColor: "#fff",
           }}
         >

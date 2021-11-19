@@ -10,11 +10,25 @@ import {
 } from "@mui/material";
 import { ArrowBack } from "@mui/icons-material";
 
-export default function Invoice() {
+export default function Invoice(props) {
   const router = useRouter();
+  const { query } = useRouter();
+  const myInvoice = props.mydata.find((item) => item.id == query.invoice);
+
+  function getMonthName(month) {
+    const d = new Date();
+    d.setMonth(month - 1);
+    const monthName = d.toLocaleString("default", { month: "long" });
+    return monthName;
+  }
+
+  function getStartingDate(date) {
+    const splitDate = date.split("/");
+    return `${splitDate[0]}/${Number(splitDate[1]) - 1}/${splitDate[2]}`;
+  }
 
   return (
-    <Container disableGutters maxWidth="900px">
+    <Container disableGutters maxWidth="md">
       <AppBar
         position="sticky"
         style={{
@@ -32,7 +46,9 @@ export default function Invoice() {
         <IconButton onClick={() => router.back()}>
           <ArrowBack />
         </IconButton>
-        <Typography variant="h5">October</Typography>
+        <Typography variant="h5">
+          {getMonthName(myInvoice.due.split("/")[1])}
+        </Typography>
       </AppBar>
       <Grid
         container
@@ -58,7 +74,7 @@ export default function Invoice() {
         </Grid>
         <Grid item xs={5}>
           <Typography variant="subtitle1" sx={{ textAlign: "end" }}>
-            21/10/2020
+            {myInvoice.due}
           </Typography>
         </Grid>
       </Grid>
@@ -93,11 +109,14 @@ export default function Invoice() {
           </Grid>
           <Grid item xs={5}>
             <Typography variant="subtitle2" sx={{ opacity: 0.7 }}>
-              21/09/2020 - 21/10/2020
+              {getStartingDate(myInvoice.due)} - {myInvoice.due}
             </Typography>
           </Grid>
           <Grid item xs={5} sx={{ textAlign: "end" }}>
-            <Typography>49,99{"\u20AC"}</Typography>
+            <Typography>
+              {myInvoice.amount}
+              {"\u20AC"}
+            </Typography>
           </Grid>
           <Divider flexItem sx={{ flexGrow: 1, flexBasis: "100%" }} />
           <Grid item xs={5}>
@@ -110,7 +129,8 @@ export default function Invoice() {
               variant="subtitle1"
               sx={{ fontWeight: "bold", textAlign: "end" }}
             >
-              49,99{"\u20AC"}
+              {myInvoice.amount}
+              {"\u20AC"}
             </Typography>
           </Grid>
         </Grid>

@@ -10,7 +10,7 @@ import * as React from "react";
 const invoiceNumbers = [
   { id: 8, status: "ISSUED", due: "21/11/2020", amount: 79.99 },
   { id: 7, status: "OVERDUE", due: "21/10/2020", amount: 49.99 },
-  { id: 6, status: "PAID", due: "21/09/2020", amount: 79.99 },
+  { id: 6, status: "OVERDUE", due: "21/09/2020", amount: 79.99 },
   { id: 5, status: "PAID", due: "21/08/2020", amount: 49.99 },
   { id: 4, status: "PAID", due: "21/07/2020", amount: 29.99 },
   { id: 3, status: "PAID", due: "21/06/2020", amount: 79.99 },
@@ -19,6 +19,35 @@ const invoiceNumbers = [
 ];
 
 const drawerWidth = 240;
+
+function getOverdueBalance() {
+  return invoiceNumbers.reduce(
+    (accumulator, currentElement) =>
+      currentElement.status === "OVERDUE"
+        ? accumulator + currentElement.amount
+        : accumulator,
+    0
+  );
+}
+
+function getAccountBalance() {
+  return invoiceNumbers.reduce(
+    (accumulator, currentElement) =>
+      currentElement.status === "OVERDUE" || currentElement.status === "ISSUED"
+        ? accumulator + currentElement.amount
+        : accumulator,
+    0
+  );
+}
+
+function roundAccountBalance() {
+  return Math.round(getAccountBalance() * 100) / 100;
+}
+
+function getNextIssueDate(date) {
+  const splitDate = date.split("/");
+  return `${splitDate[0]}/${Number(splitDate[1]) + 1}/${splitDate[2]}`;
+}
 
 export default function Home(props) {
   return (
@@ -31,6 +60,7 @@ export default function Home(props) {
           background: "#F2F5F8",
           width: { xs: "auto", lg: `calc(100vw - ${drawerWidth}px)` },
           marginRight: 0,
+          paddingBottom: "calc(44px + 1rem)",
         }}
       >
         <AppBarComponent
@@ -48,8 +78,11 @@ export default function Home(props) {
             display: "grid",
           }}
         >
-          <Typography variant="subtitle2">Account Balance</Typography>
-          <Typography variant="h2">49,99{"\u20AC"}</Typography>
+          <Typography variant="h6">Account Balance</Typography>
+          <Typography variant="h2">
+            {roundAccountBalance()}
+            {"\u20AC"}
+          </Typography>
           <Grid
             container
             sx={{
@@ -63,7 +96,10 @@ export default function Home(props) {
                 <Check />
               </Typography>
               <Typography variant="subtitle2">Overdue balance</Typography>
-              <Typography variant="h5">0{"\u20AC"}</Typography>
+              <Typography variant="h5">
+                {getOverdueBalance()}
+                {"\u20AC"}
+              </Typography>
             </Grid>
 
             <Grid item>
@@ -88,7 +124,8 @@ export default function Home(props) {
             </Grid>
           </Grid>
           <Typography variant="subtitle2">
-            Next invoice will be issued on 21/11/2020.
+            Next invoice will be issued on{" "}
+            {getNextIssueDate(invoiceNumbers[0].due)}.
           </Typography>
         </Box>
         <Invoices invoicesIds={invoiceNumbers} />
