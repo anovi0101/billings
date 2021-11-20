@@ -1,55 +1,50 @@
 import { Divider, Box, Grid, Container, Typography } from "@mui/material";
 import { Check, CalendarToday } from "@mui/icons-material";
 
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
+
 import Invoices from "../components/Invoices";
 import AppBarComponent from "../components/AppBar";
 import Footer from "../components/Footer";
 import Sidebar from "../components/Sidebar";
 import * as React from "react";
 
-const invoiceNumbers = [
-  { id: 8, status: "ISSUED", due: "21/11/2020", amount: 79.99 },
-  { id: 7, status: "OVERDUE", due: "21/10/2020", amount: 49.99 },
-  { id: 6, status: "OVERDUE", due: "21/09/2020", amount: 79.99 },
-  { id: 5, status: "PAID", due: "21/08/2020", amount: 49.99 },
-  { id: 4, status: "PAID", due: "21/07/2020", amount: 29.99 },
-  { id: 3, status: "PAID", due: "21/06/2020", amount: 79.99 },
-  { id: 2, status: "PAID", due: "21/05/2020", amount: 39.99 },
-  { id: 1, status: "PAID", due: "21/04/2020", amount: 79.99 },
-];
-
 const drawerWidth = 240;
 
-function getOverdueBalance() {
-  return invoiceNumbers.reduce(
-    (accumulator, currentElement) =>
-      currentElement.status === "OVERDUE"
-        ? accumulator + currentElement.amount
-        : accumulator,
-    0
-  );
-}
-
-function getAccountBalance() {
-  return invoiceNumbers.reduce(
-    (accumulator, currentElement) =>
-      currentElement.status === "OVERDUE" || currentElement.status === "ISSUED"
-        ? accumulator + currentElement.amount
-        : accumulator,
-    0
-  );
-}
-
-function roundAccountBalance() {
-  return Math.round(getAccountBalance() * 100) / 100;
-}
-
-function getNextIssueDate(date) {
-  const splitDate = date.split("/");
-  return `${splitDate[0]}/${Number(splitDate[1]) + 1}/${splitDate[2]}`;
-}
-
 export default function Home(props) {
+  const invoiceNumbers = props.mydata;
+
+  function getOverdueBalance() {
+    return invoiceNumbers.reduce(
+      (accumulator, currentElement) =>
+        currentElement.status === "OVERDUE"
+          ? accumulator + currentElement.amount
+          : accumulator,
+      0
+    );
+  }
+
+  function getAccountBalance() {
+    return invoiceNumbers.reduce(
+      (accumulator, currentElement) =>
+        currentElement.status === "OVERDUE" ||
+        currentElement.status === "ISSUED"
+          ? accumulator + currentElement.amount
+          : accumulator,
+      0
+    );
+  }
+
+  function roundAccountBalance() {
+    return Math.round(getAccountBalance() * 100) / 100;
+  }
+
+  function getNextIssueDate(date) {
+    const splitDate = date.split("/");
+    return `${splitDate[0]}/${Number(splitDate[1]) + 1}/${splitDate[2]}`;
+  }
+
   return (
     <>
       <Sidebar width={drawerWidth} />
@@ -87,8 +82,8 @@ export default function Home(props) {
             container
             sx={{
               justifyContent: "space-evenly",
-              p: 1,
               padding: "2rem 1rem 1rem",
+              backgroundColor: "#419ec1",
             }}
           >
             <Grid item>
@@ -123,7 +118,7 @@ export default function Home(props) {
               </Typography>
             </Grid>
           </Grid>
-          <Typography variant="subtitle2">
+          <Typography variant="subtitle2" sx={{ margin: "1rem auto" }}>
             Next invoice will be issued on{" "}
             {getNextIssueDate(invoiceNumbers[0].due)}.
           </Typography>
