@@ -1,5 +1,4 @@
 import { Grid, Paper, Typography, useMediaQuery } from "@mui/material";
-import Link from "next/link";
 import { useTheme } from "@mui/material/styles";
 
 export default function InvoiceCard(props) {
@@ -12,6 +11,7 @@ export default function InvoiceCard(props) {
   };
 
   function getMonthName(month) {
+    month = month.split("/")[1];
     const d = new Date();
     d.setMonth(month - 1);
     const monthName = d.toLocaleString("default", { month: "long" });
@@ -35,11 +35,11 @@ export default function InvoiceCard(props) {
         marginTop: 2,
         marginLeft: "auto",
         marginRight: "auto",
-        maxWidth: 500,
+        maxWidth: 900,
         flexGrow: 1,
         borderRadius: 0,
         boxShadow: "inset 0px -1px 0px rgba(50, 66, 78, 0.1)",
-        "&:not(:first-child)": { marginTop: "16px" },
+        "&:not(:first-of-type)": { marginTop: "16px" },
       }}
     >
       <Grid
@@ -60,7 +60,7 @@ export default function InvoiceCard(props) {
             Invoice {props.id}
           </Typography>
           <Typography variant="h6" gutterBottom>
-            {getMonthName(props.due.split("/")[1])}
+            {getMonthName(props.due)}
           </Typography>
           <Typography
             variant="subtitle1"

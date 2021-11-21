@@ -1,5 +1,6 @@
 import InvoiceCard from "./InvoiceCard";
-import { Grid, Typography, Box } from "@mui/material";
+import InvoiceDetails from "./InvoiceDetails";
+import { Grid, Typography } from "@mui/material";
 
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
@@ -54,8 +55,14 @@ export default function Invoices(props) {
             })}
           </Grid>
           {selectedInvoice && (
-            <Grid item>
-              <Typography>{selectedInvoice.id}</Typography>
+            <Grid item xs={4}>
+              <InvoiceDetails
+                key={selectedInvoice.id}
+                id={selectedInvoice.id}
+                status={selectedInvoice.status}
+                due={selectedInvoice.due}
+                amount={selectedInvoice.amount}
+              />
             </Grid>
           )}
         </Grid>
