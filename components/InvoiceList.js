@@ -59,7 +59,9 @@ export default function InvoiceList(props) {
               return (
                 <InvoiceCard
                   isSelected={
-                    selectedInvoice && invoice.id == selectedInvoice.id
+                    !isMobile &&
+                    selectedInvoice &&
+                    invoice.id == selectedInvoice.id
                   }
                   onCardClick={
                     isMobile
