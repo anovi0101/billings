@@ -25,6 +25,9 @@ export default function InvoiceCard(props) {
         maxWidth: 900,
         flexGrow: 1,
         borderRadius: 0,
+        border: props.isSelected
+          ? "2px solid rgba(10, 165, 171, 0.4)"
+          : "undefined",
         boxShadow: "inset 0px -1px 0px rgba(50, 66, 78, 0.1)",
         "&:not(:first-of-type)": { marginTop: "16px" },
       }}

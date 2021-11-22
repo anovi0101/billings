@@ -9,11 +9,11 @@ export default function InvoiceDetails(props) {
   return (
     <Grid
       container
+      justifyContent="space-around"
       sx={{
         backgroundColor: " #FFFFFF",
         marginTop: 2,
       }}
-      justifyContent="space-around"
     >
       <Grid container sx={{ padding: 2, justifyContent: "space-between" }}>
         <Typography
@@ -33,7 +33,7 @@ export default function InvoiceDetails(props) {
           </IconButton>
         </Typography>
 
-        <Typography>
+        <Typography component="div">
           <Typography variant="body1" sx={{ color: "#707b83" }}>
             Invoice number
           </Typography>

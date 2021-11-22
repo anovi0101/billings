@@ -7,7 +7,7 @@ import { useTheme } from "@mui/material/styles";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
-export default function Invoices(props) {
+export default function InvoiceList(props) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
   const router = useRouter();
@@ -42,11 +42,12 @@ export default function Invoices(props) {
         <Grid item container direction="row">
           <Grid
             item
-            xs={7}
+            xs={8}
             sx={{
               marginLeft: "auto",
               marginRight: "auto",
               flexDirection: "column",
+              minWidth: isMobile ? "90%" : "undefined",
             }}
           >
             {props.invoicesIds.length === 0 && (
@@ -57,6 +58,9 @@ export default function Invoices(props) {
             {props.invoicesIds.map((invoice) => {
               return (
                 <InvoiceCard
+                  isSelected={
+                    selectedInvoice && invoice.id == selectedInvoice.id
+                  }
                   onCardClick={
                     isMobile
                       ? () => router.push(`/invoices/${invoice.id}`)
