@@ -140,3 +140,9 @@ export default function Invoice(props) {
     </Container>
   );
 }
+
+export async function getServerSideProps() {
+  return {
+    props: {},
+  };
+}

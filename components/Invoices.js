@@ -9,7 +9,7 @@ import { useState } from "react";
 
 export default function Invoices(props) {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
   const router = useRouter();
 
   const [selectedInvoice, setSelectedInvoice] = useState(null);
