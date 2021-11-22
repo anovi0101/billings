@@ -15,6 +15,10 @@ a {
   box-sizing: border-box;
 }
 
-.MuiAppBar{
+.MuiAppBar {
   background-color: #fff;
+}
+
+.invoiceCard:last-child {
+  margin-bottom: 4rem;
 }

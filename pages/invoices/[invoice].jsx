@@ -10,22 +10,12 @@ import {
 } from "@mui/material";
 import { ArrowBack } from "@mui/icons-material";
 
+import { getMonthName, getStartingDate } from "../../components/Utils/Utils";
+
 export default function Invoice(props) {
   const router = useRouter();
   const { query } = useRouter();
-  const myInvoice = props.mydata.find((item) => item.id == query.invoice);
-
-  function getMonthName(month) {
-    const d = new Date();
-    d.setMonth(month - 1);
-    const monthName = d.toLocaleString("default", { month: "long" });
-    return monthName;
-  }
-
-  function getStartingDate(date) {
-    const splitDate = date.split("/");
-    return `${splitDate[0]}/${Number(splitDate[1]) - 1}/${splitDate[2]}`;
-  }
+  const myInvoice = props.mydata.find((item) => item.id == query.invoice); 
 
   return (
     <Container disableGutters maxWidth="md">
@@ -47,7 +37,7 @@ export default function Invoice(props) {
           <ArrowBack />
         </IconButton>
         <Typography variant="h5">
-          {getMonthName(myInvoice.due.split("/")[1])}
+          {getMonthName(myInvoice.due)}
         </Typography>
       </AppBar>
       <Grid

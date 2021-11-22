@@ -1,9 +1,6 @@
 import { Divider, Box, Grid, Container, Typography } from "@mui/material";
 import { Check, CalendarToday } from "@mui/icons-material";
 
-import useMediaQuery from "@mui/material/useMediaQuery";
-import { useTheme } from "@mui/material/styles";
-
 import Invoices from "../components/Invoices";
 import AppBarComponent from "../components/AppBar";
 import Footer from "../components/Footer";
@@ -14,6 +11,8 @@ const drawerWidth = 240;
 
 export default function Home(props) {
   const invoiceNumbers = props.mydata;
+  const noInvoices = invoiceNumbers.length === 0;
+  const today = new Date();
 
   function getOverdueBalance() {
     return invoiceNumbers.reduce(
@@ -40,11 +39,6 @@ export default function Home(props) {
     return Math.round(getAccountBalance() * 100) / 100;
   }
 
-  function getNextIssueDate(date) {
-    const splitDate = date.split("/");
-    return `${splitDate[0]}/${Number(splitDate[1]) + 1}/${splitDate[2]}`;
-  }
-
   return (
     <>
       <Sidebar width={drawerWidth} />
@@ -52,10 +46,8 @@ export default function Home(props) {
         disableGutters
         maxWidth={false}
         sx={{
-          background: "#F2F5F8",
           width: { xs: "auto", lg: `calc(100vw - ${drawerWidth}px)` },
           marginRight: 0,
-          paddingBottom: "calc(44px + 1rem)",
         }}
       >
         <AppBarComponent
@@ -75,7 +67,7 @@ export default function Home(props) {
         >
           <Typography variant="h6">Account Balance</Typography>
           <Typography variant="h2">
-            {roundAccountBalance()}
+            {noInvoices ? "0" : roundAccountBalance()}
             {"\u20AC"}
           </Typography>
           <Grid
@@ -86,7 +78,13 @@ export default function Home(props) {
               backgroundColor: "#419ec1",
             }}
           >
-            <Grid item>
+            <Grid
+              item
+              sx={{
+                display: noInvoices ? "none" : "flex",
+                flexDirection: "column",
+              }}
+            >
               <Typography>
                 <Check />
               </Typography>
@@ -97,7 +95,13 @@ export default function Home(props) {
               </Typography>
             </Grid>
 
-            <Grid item>
+            <Grid
+              item
+              sx={{
+                display: noInvoices ? "none" : "flex",
+                flexDirection: "column",
+              }}
+            >
               <Divider
                 light
                 orientation="vertical"
@@ -105,22 +109,28 @@ export default function Home(props) {
               />
             </Grid>
 
-            <Grid item>
+            <Grid
+              item
+              sx={{
+                display: noInvoices ? "none" : "flex",
+                flexDirection: "column",
+              }}
+            >
               <Typography>
                 <CalendarToday />
               </Typography>
               <Typography variant="subtitle2">
-                Due on {invoiceNumbers[0].due}
+                Due on {invoiceNumbers[0]?.due}
               </Typography>
               <Typography variant="h5">
-                {invoiceNumbers[0].amount}
+                {invoiceNumbers[0]?.amount}
                 {"\u20AC"}
               </Typography>
             </Grid>
           </Grid>
           <Typography variant="subtitle2" sx={{ margin: "1rem auto" }}>
             Next invoice will be issued on{" "}
-            {getNextIssueDate(invoiceNumbers[0].due)}.
+            {`21/${today.getMonth() + 1}/${today.getFullYear()}`}.
           </Typography>
         </Box>
         <Invoices invoicesIds={invoiceNumbers} />

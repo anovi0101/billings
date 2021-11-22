@@ -1,7 +1,11 @@
-import { Grid, Typography, Divider } from "@mui/material";
+import { Grid, Typography, Divider, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
 export default function InvoiceDetails(props) {
+  function getStartingDate(date) {
+    const splitDate = date.split("/");
+    return `${splitDate[0]}/${Number(splitDate[1]) - 1}/${splitDate[2]}`;
+  }
   return (
     <Grid
       container
@@ -20,10 +24,13 @@ export default function InvoiceDetails(props) {
             color: "#0AA5AB",
             fontWeight: "bold",
             justifyContent: "space-between",
+            alignItems: "center",
           }}
         >
           View invoice as PDF
-          <CloseIcon sx={{ color: "#32424E" }} />
+          <IconButton onClick={props.onCardClose}>
+            <CloseIcon sx={{ color: "#32424E" }} />
+          </IconButton>
         </Typography>
 
         <Typography>
@@ -64,9 +71,11 @@ export default function InvoiceDetails(props) {
           <Typography variant="body1" gutterBottom>
             ILIMITADA 30
           </Typography>
-          <Typography variant="body2">21/09/2020 - {props.due}</Typography>
+          <Typography variant="body2">
+            {getStartingDate(props.due)} - {props.due}
+          </Typography>
         </Grid>
-        <Grid item>
+        <Grid item sx={{ marginTop: "1.5rem" }}>
           <Typography variant="subtitle1">
             {props.amount}
             {"\u20AC"}

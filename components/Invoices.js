@@ -12,10 +12,19 @@ export default function Invoices(props) {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const router = useRouter();
 
-  let [selectedInvoice, setSelectedInvoice] = useState(null);
+  const [selectedInvoice, setSelectedInvoice] = useState(null);
 
   return (
-    <Grid container direction="column">
+    <Grid
+      container
+      direction="column"
+      sx={{
+        background: "#F2F5F8",
+        boxSizing: "border-box",
+        minHeight: "50vh",
+        overflowY: "hidden",
+      }}
+    >
       <Grid item container direction="column">
         <Grid item xs={8}>
           <Typography
@@ -33,10 +42,18 @@ export default function Invoices(props) {
         <Grid item container direction="row">
           <Grid
             item
-            direction="column"
-            xs={8}
-            sx={{ marginLeft: "auto", marginRight: "auto" }}
+            xs={7}
+            sx={{
+              marginLeft: "auto",
+              marginRight: "auto",
+              flexDirection: "column",
+            }}
           >
+            {props.invoicesIds.length === 0 && (
+              <Grid item xs={4}>
+                <Typography>There are no invoices available</Typography>
+              </Grid>
+            )}
             {props.invoicesIds.map((invoice) => {
               return (
                 <InvoiceCard
@@ -45,6 +62,7 @@ export default function Invoices(props) {
                       ? () => router.push(`/invoices/${invoice.id}`)
                       : () => setSelectedInvoice(invoice)
                   }
+                  className="invoiceCard"
                   key={invoice.id}
                   id={invoice.id}
                   status={invoice.status}
@@ -54,9 +72,10 @@ export default function Invoices(props) {
               );
             })}
           </Grid>
-          {selectedInvoice && (
+          {selectedInvoice && !isMobile && (
             <Grid item xs={4}>
               <InvoiceDetails
+                onCardClose={() => setSelectedInvoice(null)}
                 key={selectedInvoice.id}
                 id={selectedInvoice.id}
                 status={selectedInvoice.status}

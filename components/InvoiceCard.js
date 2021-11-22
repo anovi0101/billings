@@ -1,34 +1,21 @@
-import { Grid, Paper, Typography, useMediaQuery } from "@mui/material";
+import { Grid, Paper, Typography, useMediaQuery, Button } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
+
+import { getMonthName, getDueMessage } from "./Utils/Utils";
 
 export default function InvoiceCard(props) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
   const STATUS_COLORS = {
     PAID: "#7DBE00",
     OVERDUE: "#CF4520",
     ISSUED: "#64CEFB",
   };
 
-  function getMonthName(month) {
-    month = month.split("/")[1];
-    const d = new Date();
-    d.setMonth(month - 1);
-    const monthName = d.toLocaleString("default", { month: "long" });
-    return monthName;
-  }
-
-  function getDueMessage(status) {
-    if (status === "OVERDUE") {
-      return "Was due on";
-    } else if (status === "ISSUED") {
-      return "Due on";
-    }
-    return "Paid on";
-  }
-
   return (
     <Paper
+      className={props.className}
       onClick={props.onCardClick}
       sx={{
         p: 2,
@@ -84,21 +71,29 @@ export default function InvoiceCard(props) {
           >
             {props.status}
           </Typography>
-          <Typography variant="h5" sx={{ paddingRight: 1 }}>
+          <Typography
+            variant="h5"
+            sx={{ paddingRight: 1, marginTop: "0.2rem" }}
+          >
             {props.amount}
             {"\u20AC"}
           </Typography>
-          <Typography
-            variant="subtitle2"
-            sx={{
-              textAlign: "center",
-              color: "#32424E",
-              opacity: "0.7",
-              right: 0,
-            }}
-          >
-            View
-          </Typography>
+          {!isMobile && (
+            <Button>
+              <Typography
+                variant="subtitle2"
+                sx={{
+                  textAlign: "center",
+                  color: "#32424E",
+                  opacity: "0.7",
+                  right: 0,
+                  marginTop: "0.2rem",
+                }}
+              >
+                View
+              </Typography>
+            </Button>
+          )}
         </Grid>
       </Grid>
     </Paper>

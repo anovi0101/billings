@@ -47,6 +47,9 @@ export default function Sidebar(props) {
                   alex.garcia@gmail.com
                 </Typography>
               </Grid>
+              <Grid item>
+                <Typography>Viasat</Typography>
+              </Grid>
             </Grid>
           </Toolbar>
           <Divider />

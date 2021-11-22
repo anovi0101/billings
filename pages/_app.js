@@ -3,7 +3,7 @@ import Head from "next/head";
 import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-
+import "../styles/globals.css";
 const theme = createTheme();
 
 const invoiceNumbers = [
